@@ -1,0 +1,69 @@
+/* Тактовый прогресс */
+.takt-progress {
+  display: flex; align-items: center; gap: 0; margin-bottom: 20px;
+}
+.takt-badge {
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  flex: 1;
+}
+.takt-num {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 600; font-family: var(--font-mono);
+  border: 2px solid var(--c-border);
+  background: var(--c-bg); color: var(--c-text-2);
+  transition: all 0.2s;
+}
+.takt-badge.active .takt-num {
+  background: var(--c-accent); color: var(--c-accent-inv);
+  border-color: var(--c-accent);
+}
+.takt-badge.done .takt-num {
+  background: var(--c-green-bg); color: var(--c-green);
+  border-color: var(--c-green);
+}
+.takt-label { font-size: 11px; color: var(--c-text-2); font-family: var(--font-mono); }
+.takt-badge.active .takt-label { color: var(--c-text); font-weight: 500; }
+.takt-line { flex: 1; height: 2px; background: var(--c-border); margin-bottom: 14px; }
+
+/* Контекстная карточка */
+.context-card {
+  padding: 12px 14px;
+  background: var(--c-bg); border: 1px solid var(--c-border);
+  border-radius: var(--radius-lg); margin-bottom: 12px; font-size: 14px;
+}
+.context-label { color: var(--c-text-2); }
+.context-explanation { font-size: 13px; color: var(--c-text-2); margin-top: 4px; }
+
+/* Предупреждение */
+.warning-banner {
+  padding: 10px 14px;
+  background: var(--c-yellow-bg); border: 1px solid var(--c-yellow);
+  border-radius: var(--radius); font-size: 13px; color: var(--c-yellow);
+  margin-bottom: 12px; line-height: 1.5;
+}
+
+/* Старт такта */
+.takt-start { display: flex; flex-direction: column; gap: 10px; }
+.takt-title { font-size: 18px; font-weight: 600; margin-bottom: 4px; }
+.field-label { font-size: 13px; color: var(--c-text-2); display: block; margin-bottom: 4px; }
+
+/* Уведомление об уровне идентификации */
+.id-level-notice {
+  padding: 10px 12px;
+  background: var(--c-blue-bg); border-radius: var(--radius);
+  font-size: 12px; color: var(--c-text-2); line-height: 1.5;
+  margin-top: 8px;
+}
+.id-level-notice.warning { background: var(--c-yellow-bg); color: var(--c-yellow); }
+
+/* Блок текста эскалации */
+.escalation-text-block { display: flex; flex-direction: column; gap: 12px; }
+
+/* Error banner */
+.error-banner {
+  padding: 10px 14px;
+  background: var(--c-red-bg); color: var(--c-red);
+  border: 1px solid var(--c-red); border-radius: var(--radius);
+  font-size: 13px;
+}
