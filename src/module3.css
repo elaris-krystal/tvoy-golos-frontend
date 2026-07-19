@@ -16,6 +16,8 @@
 .promise-meta { font-size: 12px; color: var(--c-text-2); margin-bottom: 6px; }
 .promise-source { font-size: 12px; color: var(--c-text); text-decoration: underline; text-underline-offset: 2px; }
 .vote-row { display: flex; align-items: center; gap: 10px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--c-border); }
+.promise-dispute-btn { font-size: 11px; margin-top: 6px; padding: 2px 0; color: var(--c-text-2); text-decoration: none; }
+.promise-dispute-btn:hover { color: var(--c-red); text-decoration: underline; }
 
 /* Форма добавления */
 .promise-form { display: flex; flex-direction: column; gap: 4px; padding-bottom: 120px; }

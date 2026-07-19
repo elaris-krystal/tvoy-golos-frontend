@@ -81,6 +81,7 @@ export interface CivicPromise {
   status: PromiseStatus;
   votes_fulfilled: number;
   votes_broken: number;
+  dispute_count: number;
   created_at: string;
 }
 

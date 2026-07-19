@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { useApp } from '../stores/appStore';
-import { fetchPromises, createPromise, votePromise, fetchRegionStats, ApiError } from '../lib/api';
+import { fetchPromises, createPromise, votePromise, disputePromise, fetchRegionStats, ApiError } from '../lib/api';
 import { getDeviceHash } from '../lib/db';
 import type { CivicPromise, RegionStats } from '../types';
 
@@ -22,6 +22,7 @@ export default function Module3Promises() {
   const [error, setError] = useState('');
   const [showForm, setShowForm] = useState(false);
   const [votedIds, setVotedIds] = useState<Set<number>>(new Set());
+  const [disputedIds, setDisputedIds] = useState<Set<number>>(new Set());
 
   const regionId = state.region?.id;
 
@@ -59,6 +60,17 @@ export default function Module3Promises() {
     } catch (e) {
       if (e instanceof ApiError && e.status === 409) {
         setVotedIds(prev => new Set(prev).add(promiseId));
+      }
+    }
+  }
+
+  async function handleDispute(promiseId: number) {
+    try {
+      await disputePromise(promiseId, 'fabricated', getDeviceHash());
+      setDisputedIds(prev => new Set(prev).add(promiseId));
+    } catch (e) {
+      if (e instanceof ApiError && e.status === 409) {
+        setDisputedIds(prev => new Set(prev).add(promiseId));
       }
     }
   }
@@ -102,6 +114,14 @@ export default function Module3Promises() {
                   <button className="btn-sm ghost" onClick={() => handleVote(p.id, 'broken')}>Нет ({p.votes_broken})</button>
                 </div>
               )}
+
+              {disputedIds.has(p.id) ? (
+                <p className="hint-text" style={{ marginTop: '4px', color: 'var(--c-text-2)' }}>Жалоба отправлена, спасибо</p>
+              ) : (
+                <button className="btn-ghost promise-dispute-btn" onClick={() => handleDispute(p.id)}>
+                  ⚠ Эта информация недостоверна
+                </button>
+              )}
             </div>
           ))}
         </div>
@@ -136,11 +156,13 @@ function AddPromiseForm({
   const [officialRole, setOfficialRole] = useState('');
   const [promiseText, setPromiseText] = useState('');
   const [sourceUrl, setSourceUrl] = useState('');
+  const [accuracyConfirmed, setAccuracyConfirmed] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
   const isValid = officialName.trim() && officialRole.trim() &&
-    promiseText.trim().length >= 10 && sourceUrl.trim().startsWith('http');
+    promiseText.trim().length >= 10 && sourceUrl.trim().startsWith('http') &&
+    accuracyConfirmed;
 
   async function handleSubmit() {
     if (!isValid) return;
@@ -154,6 +176,7 @@ function AddPromiseForm({
         promise_text: promiseText.trim(),
         source_url: sourceUrl.trim(),
         device_hash: getDeviceHash(),
+        accuracy_confirmed: accuracyConfirmed,
       });
       onDone(created);
     } catch (e) {
@@ -178,6 +201,20 @@ function AddPromiseForm({
 
       <label className="field-label">Ссылка на источник (СМИ, официальный сайт)</label>
       <input className="input-field" value={sourceUrl} onChange={e => setSourceUrl(e.target.value)} placeholder="https://..." />
+
+      <div className="consent-box" style={{ marginTop: '12px' }}>
+        <p className="consent-text">
+          Вы публично приписываете эти слова конкретному названному человеку. Убедитесь, что ссылка
+          на источник действительно подтверждает текст обещания дословно или по смыслу.
+          Распространение недостоверных сведений о человеке может повлечь ответственность
+          (ст. 152 ГК РФ). Другие пользователи могут пожаловаться на недостоверную запись —
+          после нескольких жалоб она скрывается до проверки.
+        </p>
+        <label className="checkbox-row" style={{ marginTop: '8px', marginBottom: 0 }}>
+          <input type="checkbox" checked={accuracyConfirmed} onChange={e => setAccuracyConfirmed(e.target.checked)} />
+          <span>Я подтверждаю, что информация достоверна и подтверждена источником</span>
+        </label>
+      </div>
 
       {error && <div className="error-banner">{error}</div>}
 

@@ -75,6 +75,7 @@ export async function fetchPromises(regionId: string, statusFilter?: string): Pr
 export async function createPromise(params: {
   region_id: string; official_name: string; official_role: string;
   promise_text: string; source_url: string; promise_date?: string; device_hash: string;
+  accuracy_confirmed: boolean;
 }): Promise<CivicPromise> {
   return apiPost<CivicPromise>('/promises', params);
 }
@@ -85,6 +86,14 @@ export async function votePromise(
   voterHash: string,
 ): Promise<CivicPromise> {
   return apiPost<CivicPromise>(`/promises/${promiseId}/vote`, { vote, voter_hash: voterHash });
+}
+
+export async function disputePromise(
+  promiseId: number,
+  reason: 'not_in_source' | 'fabricated' | 'other',
+  disputerHash: string,
+): Promise<void> {
+  return apiPost<void>(`/promises/${promiseId}/dispute`, { reason, disputer_hash: disputerHash });
 }
 
 export async function fetchRegionStats(regionId: string): Promise<RegionStats> {
