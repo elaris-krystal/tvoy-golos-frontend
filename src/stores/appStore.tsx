@@ -1,6 +1,30 @@
 import { createContext, useContext, useReducer, ReactNode } from "react";
 import type { Region, CategoryKey, ClassificationResult } from "../types";
 
+const REGION_STORAGE_KEY = "tvoy-golos-region";
+
+function loadPersistedRegion(): Region | null {
+  try {
+    const raw = localStorage.getItem(REGION_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function persistRegion(region: Region | null) {
+  try {
+    if (region) {
+      localStorage.setItem(REGION_STORAGE_KEY, JSON.stringify(region));
+    } else {
+      localStorage.removeItem(REGION_STORAGE_KEY);
+    }
+  } catch {
+    // localStorage недоступен (приватный режим и т.п.) — не критично,
+    // просто не будет персистентности между сессиями
+  }
+}
+
 interface AppState {
   region: Region | null;
   categoryKey: CategoryKey | null;
@@ -16,7 +40,11 @@ interface AppState {
 }
 
 const initialState: AppState = {
-  region: null,
+  // Регион — единственное поле, которое переживает перезагрузку страницы.
+  // Нужно, чтобы Модуль 3 («Что обещал чиновник»), не завязанный на весь
+  // линейный флоу Модуля 1, не заставлял заново выбирать регион при каждом
+  // визите — раньше это выглядело как переход "по кругу".
+  region: loadPersistedRegion(),
   categoryKey: null,
   subcategoryKey: null,
   generatedText: "",
@@ -45,7 +73,9 @@ type Action =
 
 function reducer(state: AppState, action: Action): AppState {
   switch (action.type) {
-    case "SET_REGION": return { ...state, region: action.payload, step: 2 };
+    case "SET_REGION":
+      persistRegion(action.payload);
+      return { ...state, region: action.payload, step: 2 };
     case "SET_CATEGORY": return { ...state, categoryKey: action.payload, subcategoryKey: null, step: 2 };
     case "SET_SUBCATEGORY": return { ...state, subcategoryKey: action.payload, step: 3 };
     case "SET_GENERATED_TEXT": return { ...state, generatedText: action.payload, editedText: action.payload, step: 4 };

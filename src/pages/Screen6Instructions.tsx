@@ -60,13 +60,7 @@ export default function Screen6Instructions() {
         </div>
         <div className="instr-card instr-card-info">
           <h3>💡 Через сайт органа</h3>
-          <p>Найдите сайт нужного органа соцзащиты и воспользуйтесь разделом «Обращения граждан». Точная ссылка зависит от вашего региона и органа.</p>
-          <a
-            href={`https://yandex.ru/search/?text=${encodeURIComponent(`орган соцзащиты ${state.region?.name ?? ''} обращения граждан официальный сайт`)}`}
-            target="_blank" rel="noreferrer" className="btn-outline"
-          >
-            Найти сайт органа ↗
-          </a>
+          <p>Найдите сайт нужного органа соцзащиты и воспользуйтесь разделом «Обращения граждан». Точная ссылка зависит от вашего региона и органа — единой ссылки для всех регионов не существует.</p>
         </div>
         <div className="instr-card instr-card-info">
           <h3>💡 Лично или почтой</h3>
