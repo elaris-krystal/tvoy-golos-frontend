@@ -1,4 +1,4 @@
-import type { Benefit, ClassificationResult, CivicPromise, RegionStats } from '../types';
+import type { Benefit, ClassificationResult } from '../types';
 
 const API_BASE = (import.meta as any).env?.VITE_API_URL ?? 'http://localhost:8000/api';
 
@@ -65,39 +65,14 @@ export async function submitFeedback(params: {
   return apiPost<void>('/feedback', params);
 }
 
-// ── Модуль 3: Трекер обещаний ────────────────────────────────────────────
+// ── Обратная связь с разработчиками ──────────────────────────────────────
 
-export async function fetchPromises(regionId: string, statusFilter?: string): Promise<CivicPromise[]> {
-  const q = statusFilter ? `&status=${statusFilter}` : '';
-  return apiGet<CivicPromise[]>(`/promises?region_id=${regionId}${q}`);
-}
-
-export async function createPromise(params: {
-  region_id: string; official_name: string; official_role: string;
-  promise_text: string; source_url: string; promise_date?: string; device_hash: string;
-  accuracy_confirmed: boolean;
-}): Promise<CivicPromise> {
-  return apiPost<CivicPromise>('/promises', params);
-}
-
-export async function votePromise(
-  promiseId: number,
-  vote: 'fulfilled' | 'broken',
-  voterHash: string,
-): Promise<CivicPromise> {
-  return apiPost<CivicPromise>(`/promises/${promiseId}/vote`, { vote, voter_hash: voterHash });
-}
-
-export async function disputePromise(
-  promiseId: number,
-  reason: 'not_in_source' | 'fabricated' | 'other',
-  disputerHash: string,
-): Promise<void> {
-  return apiPost<void>(`/promises/${promiseId}/dispute`, { reason, disputer_hash: disputerHash });
-}
-
-export async function fetchRegionStats(regionId: string): Promise<RegionStats> {
-  return apiGet<RegionStats>(`/promises/stats?region_id=${regionId}`);
+export async function submitDevFeedback(params: {
+  message: string;
+  category: 'bug' | 'suggestion' | 'other';
+  page: string;
+}): Promise<void> {
+  return apiPost<void>('/dev-feedback', params);
 }
 
 export { ApiError };

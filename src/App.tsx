@@ -8,11 +8,10 @@ import Screen5Consent from './pages/Screen5Consent';
 import Screen6Instructions from './pages/Screen6Instructions';
 import Screen7Response from './pages/Screen7Response';
 import Module2Escalation from './pages/Module2Escalation';
-import Module3Promises from './pages/Module3Promises';
 import Diary from './pages/Diary';
+import DevFeedback from './pages/DevFeedback';
 import './module2.css';
 import './escalation-cta.css';
-import './module3.css';
 
 export default function App() {
   return (
@@ -28,8 +27,8 @@ export default function App() {
           <Route path="/instructions" element={<Screen6Instructions />} />
           <Route path="/response" element={<Screen7Response />} />
           <Route path="/escalation" element={<Module2Escalation />} />
-          <Route path="/promises" element={<Module3Promises />} />
           <Route path="/diary" element={<Diary />} />
+          <Route path="/feedback" element={<DevFeedback />} />
         </Routes>
       </BrowserRouter>
     </AppProvider>

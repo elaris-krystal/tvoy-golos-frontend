@@ -66,29 +66,3 @@ export interface LocalReminder {
 
 // Уровни идентификации (ТЗ v1.4)
 export type IdentificationLevel = 0 | 1 | 2;
-
-// Модуль 3: трекер обещаний
-export type PromiseStatus = 'checking' | 'fulfilled' | 'broken';
-
-export interface CivicPromise {
-  id: number;
-  region_id: string;
-  official_name: string;
-  official_role: string;
-  promise_text: string;
-  source_url: string;
-  promise_date?: string;
-  status: PromiseStatus;
-  votes_fulfilled: number;
-  votes_broken: number;
-  dispute_count: number;
-  created_at: string;
-}
-
-export interface RegionStats {
-  region_id: string;
-  total_promises: number;
-  fulfilled_count: number;
-  broken_count: number;
-  checking_count: number;
-}

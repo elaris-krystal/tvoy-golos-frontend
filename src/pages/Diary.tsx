@@ -83,7 +83,7 @@ export default function Diary() {
 
       <div className="footer-action">
         <button className="btn-outline" onClick={() => navigate('/region')}>+ Новое обращение</button>
-        <button className="btn-ghost" onClick={() => navigate('/promises')}>Что обещал чиновник →</button>
+        <button className="btn-ghost" onClick={() => navigate('/feedback')}>Сообщить об ошибке или предложить улучшение</button>
       </div>
     </Layout>
   );
