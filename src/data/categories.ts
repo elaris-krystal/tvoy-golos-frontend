@@ -77,4 +77,15 @@ export const CATEGORIES: Category[] = [
       { key: 'other_labor', label: 'Другой трудовой вопрос' },
     ],
   },
+  {
+    key: 'utilities',
+    label: 'ЖКХ и управляющая компания',
+    icon: '🔧',
+    subcategories: [
+      { key: 'utility_overcharge', label: 'Завышенные начисления' },
+      { key: 'utility_quality', label: 'Некачественные коммунальные услуги' },
+      { key: 'management_company', label: 'Бездействие управляющей компании' },
+      { key: 'capital_repair', label: 'Взносы на капремонт' },
+    ],
+  },
 ];
