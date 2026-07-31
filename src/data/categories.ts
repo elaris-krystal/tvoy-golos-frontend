@@ -32,6 +32,8 @@ export const CATEGORIES: Category[] = [
       { key: 'disability', label: 'Инвалидность' },
       { key: 'chronic', label: 'Хроническое заболевание' },
       { key: 'veteran', label: 'Ветеран боевых действий' },
+      { key: 'paid_services_free_clinic', label: 'Незаконные платные услуги по ОМС' },
+      { key: 'treatment_refusal', label: 'Отказ в медицинской помощи' },
     ],
   },
   {
