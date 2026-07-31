@@ -109,3 +109,18 @@ body { font-family: var(--font-body); background: var(--c-bg); color: var(--c-te
 .empty-card { padding: 16px; background: var(--c-bg); border-radius: var(--radius); font-size: 14px; color: var(--c-text-2); }
 .hint-text { font-size: 13px; color: var(--c-text-2); margin-bottom: 10px; }
 .error-banner { padding: 10px 14px; background: var(--c-red-bg); color: var(--c-red); border: 1px solid var(--c-red); border-radius: var(--radius); font-size: 13px; margin-top: 8px; }
+
+/* Печатная версия обращения (для «Скачать/распечатать как PDF») */
+.print-only { display: none; }
+@media print {
+  body * { visibility: hidden; }
+  .print-only, .print-only * { visibility: visible; }
+  .print-only {
+    display: block;
+    position: absolute; top: 0; left: 0; width: 100%;
+    padding: 30px; font-family: 'IBM Plex Sans', serif; color: #000; background: #fff;
+  }
+  .print-doc-date { text-align: right; font-size: 13px; margin-bottom: 24px; }
+  .print-doc-body { font-size: 14px; line-height: 1.7; white-space: pre-wrap; text-align: justify; }
+  .print-doc-footer { margin-top: 40px; font-size: 12px; color: #444; border-top: 1px solid #ccc; padding-top: 10px; }
+}

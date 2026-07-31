@@ -49,6 +49,10 @@ export default function Screen6Instructions() {
     }
   }
 
+  function handleDownloadPdf() {
+    window.print();
+  }
+
   return (
     <Layout title="Как отправить" subtitle="Выберите удобный способ" step={6} onBack={() => navigate('/consent')}>
       <div className="instruction-cards">
@@ -71,6 +75,21 @@ export default function Screen6Instructions() {
       <button className="btn-secondary" onClick={handleCopy} style={{ marginTop: '1rem' }}>
         {copied ? '✓ Скопировано' : 'Скопировать текст обращения'}
       </button>
+
+      <button className="btn-outline" onClick={handleDownloadPdf} style={{ marginTop: '0.5rem', width: '100%' }}>
+        Скачать / распечатать как PDF
+      </button>
+
+      {/* Печатная версия — видна только в диалоге печати браузера (Ctrl+P / «Сохранить как PDF») */}
+      <div className="print-only">
+        <div className="print-doc-date">
+          {state.region?.name ?? ''}, {new Date().toLocaleDateString('ru-RU')}
+        </div>
+        <div className="print-doc-body">{state.editedText || state.generatedText}</div>
+        <div className="print-doc-footer">
+          Документ подготовлен с помощью сервиса «Твой Голос» — технического инструмента помощи в составлении обращений. Сервис не является юридической фирмой, адвокатом или представителем пользователя. Текст носит рекомендательный характер, пользователь самостоятельно проверяет содержание и несёт полную ответственность за направляемое обращение.
+        </div>
+      </div>
 
       <div className="reminder-section">
         {!reminderSet ? (
