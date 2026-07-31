@@ -103,4 +103,15 @@ export const CATEGORIES: Category[] = [
       { key: 'other_construction', label: 'Другой вопрос по ДДУ' },
     ],
   },
+  {
+    key: 'ecology',
+    label: 'Экология',
+    icon: '🌳',
+    subcategories: [
+      { key: 'illegal_dump', label: 'Незаконная свалка' },
+      { key: 'illegal_logging', label: 'Незаконная вырубка деревьев' },
+      { key: 'pollution', label: 'Загрязнение воздуха, воды или почвы' },
+      { key: 'other_ecology', label: 'Другой экологический вопрос' },
+    ],
+  },
 ];

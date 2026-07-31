@@ -5,7 +5,7 @@ export interface Region {
 
 export type CategoryKey =
   | 'family' | 'employment' | 'health'
-  | 'housing' | 'education' | 'pension' | 'labor' | 'utilities' | 'construction';
+  | 'housing' | 'education' | 'pension' | 'labor' | 'utilities' | 'construction' | 'ecology';
 
 export interface Category {
   key: CategoryKey;
