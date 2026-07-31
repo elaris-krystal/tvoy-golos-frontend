@@ -64,6 +64,8 @@ export const CATEGORIES: Category[] = [
       { key: 'pensioner', label: 'Пенсионер' },
       { key: 'pre_pension', label: 'Предпенсионный возраст' },
       { key: 'breadwinner_loss', label: 'Потеря кормильца' },
+      { key: 'pension_recalculation', label: 'Неверный расчёт или отказ в перерасчёте' },
+      { key: 'pension_underpayment', label: 'Недополученные доплаты или индексация' },
     ],
   },
   {
