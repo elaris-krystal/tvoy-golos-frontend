@@ -88,4 +88,15 @@ export const CATEGORIES: Category[] = [
       { key: 'capital_repair', label: 'Взносы на капремонт' },
     ],
   },
+  {
+    key: 'construction',
+    label: 'Долевое строительство',
+    icon: '🏗️',
+    subcategories: [
+      { key: 'construction_delay', label: 'Задержка передачи квартиры' },
+      { key: 'developer_bankruptcy', label: 'Банкротство застройщика' },
+      { key: 'construction_defects', label: 'Недостатки качества квартиры' },
+      { key: 'other_construction', label: 'Другой вопрос по ДДУ' },
+    ],
+  },
 ];
