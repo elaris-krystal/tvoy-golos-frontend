@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface LayoutProps {
@@ -10,16 +10,43 @@ interface LayoutProps {
   showDiary?: boolean;
 }
 
+const LARGE_TEXT_KEY = 'tvoy-golos-large-text';
+
 export default function Layout({ children, title, subtitle, step, onBack, showDiary }: LayoutProps) {
   const navigate = useNavigate();
+  const [largeText, setLargeText] = useState(() => {
+    try {
+      return localStorage.getItem(LARGE_TEXT_KEY) === '1';
+    } catch {
+      return false;
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(LARGE_TEXT_KEY, largeText ? '1' : '0');
+    } catch { /* приватный режим браузера — не критично */ }
+  }, [largeText]);
+
   return (
-    <div className="app-shell">
+    <div className={`app-shell${largeText ? ' large-text' : ''}`}>
       <header className="app-header">
         <div className="header-left">
           {onBack && <button className="btn-icon" onClick={onBack} aria-label="Назад">←</button>}
           <span className="app-wordmark">Твой голос</span>
         </div>
-        {showDiary && <button className="btn-ghost" onClick={() => navigate('/diary')}>Дневник</button>}
+        <div className="header-right">
+          <button
+            className="btn-icon"
+            onClick={() => setLargeText((v) => !v)}
+            aria-label={largeText ? 'Обычный размер текста' : 'Крупный текст'}
+            aria-pressed={largeText}
+            title="Крупный текст"
+          >
+            {largeText ? 'A' : 'Aa'}
+          </button>
+          {showDiary && <button className="btn-ghost" onClick={() => navigate('/diary')}>Дневник</button>}
+        </div>
       </header>
       {step && (
         <div className="progress-bar">
