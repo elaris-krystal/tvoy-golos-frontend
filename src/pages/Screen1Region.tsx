@@ -17,6 +17,13 @@ export default function Screen1Region() {
         {filtered.length === 0 && <p className="empty-state">Ничего не найдено</p>}
         {filtered.map(r => (<button key={r.id} className={`list-item ${selected?.id === r.id ? 'selected' : ''}`} onClick={() => setSelected(r)}><span>{r.name}</span>{selected?.id === r.id && <span className="check">✓</span>}</button>))}
       </div>
+      {filtered.some(r => r.disputedTerritory) && (
+        <p className="region-footnote">
+          * Территория, статус которой является предметом международного спора. Указана
+          по административной номенклатуре, используемой российскими госорганами, куда
+          фактически направляются обращения через этот сервис.
+        </p>
+      )}
       <div className="footer-action"><button className="btn-primary" disabled={!selected} onClick={handleSelect}>Продолжить</button></div>
     </Layout>
   );

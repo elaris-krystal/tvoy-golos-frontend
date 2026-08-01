@@ -1,6 +1,9 @@
 export interface Region {
   id: string;
   name: string;
+  /** Территория, статус которой является предметом международного спора —
+   *  используется только для отображения пояснительной сноски в UI. */
+  disputedTerritory?: boolean;
 }
 
 export type CategoryKey =
