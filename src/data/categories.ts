@@ -114,4 +114,15 @@ export const CATEGORIES: Category[] = [
       { key: 'other_ecology', label: 'Другой экологический вопрос' },
     ],
   },
+  {
+    key: 'consumer',
+    label: 'Права потребителя',
+    icon: '🛒',
+    subcategories: [
+      { key: 'refund_refusal', label: 'Отказ в возврате денег за товар' },
+      { key: 'warranty_defect', label: 'Недостатки товара по гарантии' },
+      { key: 'service_quality', label: 'Некачественная услуга' },
+      { key: 'consumer_other', label: 'Другой потребительский вопрос' },
+    ],
+  },
 ];
