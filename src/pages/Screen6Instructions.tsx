@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { useApp } from '../stores/appStore';
 import { addCase, addReminder, generateId, todayStr, addDays } from '../lib/db';
+import { isDocumentAvailable, downloadOfficialDocument, ApiError } from '../lib/api';
 import type { CategoryKey } from '../types';
 
 export default function Screen6Instructions() {
@@ -10,6 +11,33 @@ export default function Screen6Instructions() {
   const { state, dispatch } = useApp();
   const [reminderSet, setReminderSet] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [docAvailable, setDocAvailable] = useState(false);
+  const [docLoading, setDocLoading] = useState(false);
+  const [docError, setDocError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!state.categoryKey || !state.subcategoryKey) return;
+    isDocumentAvailable(state.categoryKey, state.subcategoryKey).then(setDocAvailable);
+  }, [state.categoryKey, state.subcategoryKey]);
+
+  async function handleDownloadDocument() {
+    if (!state.region || !state.categoryKey || !state.subcategoryKey) return;
+    setDocLoading(true);
+    setDocError(null);
+    try {
+      await downloadOfficialDocument({
+        region_id: state.region.id,
+        region_name: state.region.name,
+        category: state.categoryKey,
+        subcategory: state.subcategoryKey,
+        reason_text: state.editedText || state.generatedText || '',
+      });
+    } catch (e) {
+      setDocError(e instanceof ApiError ? e.message : 'Не удалось скачать документ. Попробуйте позже.');
+    } finally {
+      setDocLoading(false);
+    }
+  }
 
   async function handleSetReminder() {
     if (!state.region || !state.categoryKey || !state.subcategoryKey) return;
@@ -79,6 +107,21 @@ export default function Screen6Instructions() {
       <button className="btn-outline" onClick={handleDownloadPdf} style={{ marginTop: '0.5rem', width: '100%' }}>
         Скачать / распечатать как PDF
       </button>
+
+      {docAvailable && (
+        <div className="instr-card instr-card-info" style={{ marginTop: '1rem' }}>
+          <h3>📄 Официальный бланк доступен</h3>
+          <p>
+            Для вашей ситуации можно скачать заполненный официальный бланк госоргана (Word).
+            Личные данные (ФИО, СНИЛС, адрес) в нём оставлены пустыми — сервис их не хранит,
+            заполните их самостоятельно перед подачей.
+          </p>
+          <button className="btn-outline" onClick={handleDownloadDocument} disabled={docLoading}>
+            {docLoading ? 'Готовим документ…' : 'Скачать официальный бланк (.docx)'}
+          </button>
+          {docError && <p className="error-text" style={{ marginTop: '0.5rem' }}>{docError}</p>}
+        </div>
+      )}
 
       {/* Печатная версия — видна только в диалоге печати браузера (Ctrl+P / «Сохранить как PDF») */}
       <div className="print-only">

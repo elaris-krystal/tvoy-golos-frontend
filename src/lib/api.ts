@@ -76,3 +76,37 @@ export async function submitDevFeedback(params: {
 }
 
 export { ApiError };
+
+// ── Модуль «Документы»: официальные бланки госорганов ──────────────────
+
+export async function isDocumentAvailable(category: string, subcategory: string): Promise<boolean> {
+  try {
+    const res = await apiGet<{ available: boolean }>(`/document-available?category=${category}&subcategory=${subcategory}`);
+    return res.available;
+  } catch {
+    return false;
+  }
+}
+
+export async function downloadOfficialDocument(params: {
+  region_id: string; region_name: string; category: string; subcategory: string; reason_text: string;
+}): Promise<void> {
+  const res = await fetch(`${API_BASE}/generate-document`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(params),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ detail: 'Не удалось сгенерировать документ' }));
+    throw new ApiError(res.status, err.detail ?? 'Неизвестная ошибка');
+  }
+  const blob = await res.blob();
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'zayavlenie_pension_pereraschet.docx';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  window.URL.revokeObjectURL(url);
+}
