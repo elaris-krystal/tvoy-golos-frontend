@@ -35,6 +35,11 @@ export default function Layout({ children, title, subtitle, step, onBack, showDi
         )}
         {children}
       </main>
+      <footer className="app-footer">
+        <button className="link-button link-button-muted" onClick={() => navigate('/about')}>
+          Об услуге
+        </button>
+      </footer>
     </div>
   );
 }

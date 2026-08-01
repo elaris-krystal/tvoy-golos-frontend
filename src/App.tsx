@@ -10,6 +10,7 @@ import Screen7Response from './pages/Screen7Response';
 import Module2Escalation from './pages/Module2Escalation';
 import Diary from './pages/Diary';
 import DevFeedback from './pages/DevFeedback';
+import About from './pages/About';
 import './module2.css';
 import './escalation-cta.css';
 
@@ -29,6 +30,7 @@ export default function App() {
           <Route path="/escalation" element={<Module2Escalation />} />
           <Route path="/diary" element={<Diary />} />
           <Route path="/feedback" element={<DevFeedback />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </BrowserRouter>
     </AppProvider>
