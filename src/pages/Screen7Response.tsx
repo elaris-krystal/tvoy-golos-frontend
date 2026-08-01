@@ -52,7 +52,6 @@ export default function Screen7Response() {
     if (!result || feedbackSent) return;
     try {
       await submitFeedback({
-        response_text: responseText,
         original_request: referenceText,
         region_id: state.region?.id ?? 'unknown',
         category: state.categoryKey ?? 'unknown',

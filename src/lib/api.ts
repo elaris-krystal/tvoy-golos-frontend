@@ -59,7 +59,7 @@ export async function logSession(params: {
 }
 
 export async function submitFeedback(params: {
-  response_text: string; original_request: string; region_id: string;
+  original_request: string; region_id: string;
   category: string; subcategory: string; system_label: string; user_label: string;
 }): Promise<void> {
   return apiPost<void>('/feedback', params);
