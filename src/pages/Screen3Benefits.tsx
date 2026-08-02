@@ -82,7 +82,7 @@ export default function Screen3Benefits() {
     ? `Данные из кэша (${state.region?.name})`
     : isViolation
       ? `${state.region?.name ?? ''}`
-      : `Льготы для ${state.region?.name ?? ''}`;
+      : `Льготы — ${state.region?.name ?? ''}`;
 
   return (
     <Layout title={isViolation ? 'Основание для обращения' : 'Вероятные льготы'} subtitle={subtitle} step={3} onBack={() => navigate('/category')}>
