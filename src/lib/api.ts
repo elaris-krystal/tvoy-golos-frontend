@@ -51,13 +51,6 @@ export async function classifyResponse(params: {
   return apiPost<ClassificationResult>('/classify-response', params);
 }
 
-export async function logSession(params: {
-  device_hash: string; region_id: string; category: string; subcategory: string;
-  template_version?: string; edit_pct?: number; consent_given?: boolean;
-}): Promise<void> {
-  return apiPost<void>('/session', params);
-}
-
 export async function submitFeedback(params: {
   original_request: string; region_id: string;
   category: string; subcategory: string; system_label: string; user_label: string;
