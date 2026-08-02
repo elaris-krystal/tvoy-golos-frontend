@@ -80,10 +80,12 @@ export default function Screen3Benefits() {
 
   const subtitle = isFallback
     ? `Данные из кэша (${state.region?.name})`
-    : `Льготы для ${state.region?.name ?? ''}`;
+    : isViolation
+      ? `${state.region?.name ?? ''}`
+      : `Льготы для ${state.region?.name ?? ''}`;
 
   return (
-    <Layout title="Вероятные льготы" subtitle={subtitle} step={3} onBack={() => navigate('/category')}>
+    <Layout title={isViolation ? 'Основание для обращения' : 'Вероятные льготы'} subtitle={subtitle} step={3} onBack={() => navigate('/category')}>
       {loading && <p className="loading-text">Проверяем базу…</p>}
       {error && <div className="error-banner">{error}</div>}
       {!loading && benefits.length === 0 && (
