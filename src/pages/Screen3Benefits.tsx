@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { useApp } from '../stores/appStore';
 import { fetchBenefits, ApiError } from '../lib/api';
+import { isViolationSubcategory } from '../data/violationSubcategories';
 import type { Benefit } from '../types';
 
 const FEDERAL_FALLBACK: Record<string, Benefit[]> = {
@@ -75,6 +76,8 @@ export default function Screen3Benefits() {
     }
   }
 
+  const isViolation = isViolationSubcategory(state.categoryKey, state.subcategoryKey);
+
   const subtitle = isFallback
     ? `Данные из кэша (${state.region?.name})`
     : `Льготы для ${state.region?.name ?? ''}`;
@@ -84,13 +87,19 @@ export default function Screen3Benefits() {
       {loading && <p className="loading-text">Проверяем базу…</p>}
       {error && <div className="error-banner">{error}</div>}
       {!loading && benefits.length === 0 && (
-        <div className="empty-card"><p>По выбранной категории данных пока нет. Запрос в соцзащиту поможет получить точный перечень.</p></div>
+        <div className="empty-card">
+          <p>
+            {isViolation
+              ? 'Эта категория — не про льготы, а про основание для обращения. Нажмите «Сформировать запрос», чтобы перейти к следующему шагу.'
+              : 'По выбранной категории данных пока нет. Запрос в соцзащиту поможет получить точный перечень.'}
+          </p>
+        </div>
       )}
       {!loading && benefits.length > 0 && (
         <div className="benefits-list">
           <p className="disclaimer-small">
-            {state.categoryKey === 'labor'
-              ? 'Это не льготы, а основания и шаги для защиты ваших трудовых прав.'
+            {isViolation
+              ? 'Это не льготы, а основания и шаги для защиты ваших прав.'
               : 'Список предварительный. Точный перечень предоставит орган соцзащиты в ответ на ваш запрос.'}
           </p>
           {benefits.map(b => (
