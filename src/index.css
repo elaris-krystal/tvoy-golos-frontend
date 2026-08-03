@@ -87,7 +87,6 @@ body { font-family: var(--font-body); background: var(--c-bg); color: var(--c-te
 .status-resolved { background: var(--c-green-bg); color: var(--c-green); }
 .case-topic { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
 .case-meta { font-size: 12px; color: var(--c-text-2); margin-bottom: 6px; }
-.countdown { font-size: 12px; font-family: var(--font-mono); color: var(--c-text-2); }
 .btn-delete { background: none; border: none; font-size: 20px; cursor: pointer; color: var(--c-text-2); padding: 0 4px; }
 .empty-diary { text-align: center; padding: 40px 20px; }
 .empty-diary p { color: var(--c-text-2); margin-bottom: 16px; }
@@ -161,3 +160,6 @@ body { font-family: var(--font-body); background: var(--c-bg); color: var(--c-te
 }
 
 .region-footnote { font-size: 0.78rem; color: #9ca3af; padding: 8px 4px 0; line-height: 1.4; }
+
+.countdown { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 12px; font-family: var(--font-mono); color: var(--c-text-2); }
+.calendar-btn { white-space: nowrap; font-family: var(--font-sans, inherit); font-size: 12px; }

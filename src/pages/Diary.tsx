@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 import { getCases, deleteCase, getDueReminders, dismissReminder } from '../lib/db';
+import { downloadIcsForCase } from '../lib/ics';
 import type { ActiveCase, LocalReminder } from '../types';
 
 const STATUS_LABELS: Record<string, string> = {
@@ -71,6 +72,13 @@ export default function Diary() {
               {c.status === 'waiting' && (
                 <div className="countdown">
                   {daysLeft(c.date_expected) > 0 ? `Ожидаемый ответ через ${daysLeft(c.date_expected)} дн.` : 'Срок ответа истёк — рекомендуем эскалировать'}
+                  <button
+                    className="btn-sm ghost calendar-btn"
+                    onClick={() => downloadIcsForCase(c)}
+                    title="Добавить напоминание о сроке в календарь телефона"
+                  >
+                    📅 В календарь
+                  </button>
                 </div>
               )}
               {c.status === 'escalated' && (
