@@ -39,7 +39,7 @@ export default function Diary() {
   }
 
   return (
-    <Layout title="Дневник аудитора" subtitle="Ваши активные обращения">
+    <Layout title="Дневник аудитора" subtitle="Ваши активные обращения" onBack={() => navigate('/region')} showBottomNav>
       {dueReminders.length > 0 && (
         <div className="reminder-banners">
           {dueReminders.map(r => (

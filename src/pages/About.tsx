@@ -5,7 +5,7 @@ export default function About() {
   const navigate = useNavigate();
 
   return (
-    <Layout title="Об услуге" onBack={() => navigate(-1)}>
+    <Layout title="Об услуге" onBack={() => navigate(-1)} showBottomNav>
       <div className="about-page">
         <section>
           <h2>Что это за сервис</h2>

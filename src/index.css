@@ -174,3 +174,22 @@ body { font-family: var(--font-body); background: var(--c-bg); color: var(--c-te
   --c-blue-bg: #1A2A3A;
 }
 .dark-theme img, .dark-theme .print-only { filter: none; }
+
+/* Нижняя навигация (личный кабинет) */
+.bottom-nav {
+  position: fixed;
+  bottom: 0; left: 50%; transform: translateX(-50%);
+  width: 100%; max-width: 520px;
+  display: flex; justify-content: space-around;
+  background: var(--c-surface); border-top: 1px solid var(--c-border);
+  padding: 6px 0 max(6px, env(safe-area-inset-bottom));
+  z-index: 20;
+}
+.bottom-nav-item {
+  flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  background: none; border: none; cursor: pointer; padding: 6px 4px;
+  color: var(--c-text-2); font-size: 11px; border-radius: var(--radius);
+}
+.bottom-nav-item.active { color: var(--c-accent); font-weight: 600; }
+.bottom-nav-icon { font-size: 20px; line-height: 1; }
+.bottom-nav-label { line-height: 1; }

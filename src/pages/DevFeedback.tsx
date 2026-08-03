@@ -40,7 +40,7 @@ export default function DevFeedback() {
 
   if (sent) {
     return (
-      <Layout title="Спасибо" onBack={() => navigate('/diary')}>
+      <Layout title="Спасибо" onBack={() => navigate('/diary')} showBottomNav>
         <div className="empty-card">
           <p>Сообщение отправлено. Мы читаем всё, что присылают, хотя не можем ответить лично — сообщение анонимно.</p>
         </div>
@@ -52,7 +52,7 @@ export default function DevFeedback() {
   }
 
   return (
-    <Layout title="Обратная связь" subtitle="Сообщение анонимно, без привязки к вам" onBack={() => navigate('/diary')}>
+    <Layout title="Обратная связь" subtitle="Сообщение анонимно, без привязки к вам" onBack={() => navigate('/diary')} showBottomNav>
       <label className="field-label" id="feedback-type-label">Тип сообщения</label>
       <div className="category-grid" role="group" aria-labelledby="feedback-type-label" style={{ gridTemplateColumns: '1fr' }}>
         {(Object.keys(CATEGORY_LABELS) as Category[]).map(key => (

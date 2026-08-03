@@ -11,7 +11,7 @@ export default function Screen1Region() {
   const filtered = REGIONS.filter(r => r.name.toLowerCase().includes(query.toLowerCase()));
   function handleSelect() { if (!selected) return; dispatch({ type: 'SET_REGION', payload: selected }); navigate('/category'); }
   return (
-    <Layout title="Ваш регион" subtitle="Нужно для подбора региональных льгот" step={1} showDiary>
+    <Layout title="Ваш регион" subtitle="Нужно для подбора региональных льгот" step={1} showDiary showBottomNav>
       <div className="search-box"><input className="input-field" type="text" aria-label="Поиск региона" placeholder="Начните вводить название..." value={query} onChange={e => setQuery(e.target.value)} autoFocus /></div>
       <div className="list-scroll">
         {filtered.length === 0 && <p className="empty-state">Ничего не найдено</p>}
