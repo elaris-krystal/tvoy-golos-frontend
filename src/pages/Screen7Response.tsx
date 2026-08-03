@@ -78,6 +78,7 @@ export default function Screen7Response() {
 
       <textarea
         className="text-editor"
+        aria-label="Текст ответа чиновника"
         placeholder="Вставьте или введите текст ответа чиновника…"
         value={responseText}
         onChange={e => setResponseText(e.target.value)}

@@ -53,13 +53,14 @@ export default function DevFeedback() {
 
   return (
     <Layout title="Обратная связь" subtitle="Сообщение анонимно, без привязки к вам" onBack={() => navigate('/diary')}>
-      <label className="field-label">Тип сообщения</label>
-      <div className="category-grid" style={{ gridTemplateColumns: '1fr' }}>
+      <label className="field-label" id="feedback-type-label">Тип сообщения</label>
+      <div className="category-grid" role="group" aria-labelledby="feedback-type-label" style={{ gridTemplateColumns: '1fr' }}>
         {(Object.keys(CATEGORY_LABELS) as Category[]).map(key => (
           <button
             key={key}
             className={`sub-item ${category === key ? 'selected' : ''}`}
             onClick={() => setCategory(key)}
+            aria-pressed={category === key}
           >
             <span>{CATEGORY_LABELS[key]}</span>
             {category === key && <span className="check">✓</span>}
@@ -67,8 +68,9 @@ export default function DevFeedback() {
         ))}
       </div>
 
-      <label className="field-label" style={{ marginTop: '16px' }}>Сообщение</label>
+      <label className="field-label" htmlFor="feedback-message" style={{ marginTop: '16px' }}>Сообщение</label>
       <textarea
+        id="feedback-message"
         className="text-editor"
         style={{ minHeight: '120px' }}
         value={message}

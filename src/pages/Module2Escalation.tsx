@@ -224,8 +224,9 @@ export default function Module2Escalation() {
                 Система сформирует обращение по 59-ФЗ на основе вашего запроса.
                 Орган обязан ответить по существу в течение 30 дней.
               </p>
-              <label className="field-label">Куда направляем запрос?</label>
+              <label className="field-label" htmlFor="escalation-target">Куда направляем запрос?</label>
               <select
+                id="escalation-target"
                 className="input-field"
                 value={esc.targetOrgan}
                 onChange={e => setEsc(x => ({ ...x, targetOrgan: e.target.value }))}
@@ -245,8 +246,9 @@ export default function Module2Escalation() {
                 нарушение ст. 5 59-ФЗ и ст. 33 Конституции РФ.
                 Прокуратура обязана провести проверку.
               </p>
-              <label className="field-label">Новые факты или документы (рекомендуется)</label>
+              <label className="field-label" htmlFor="escalation-new-facts">Новые факты или документы (рекомендуется)</label>
               <textarea
+                id="escalation-new-facts"
                 className="text-editor"
                 style={{ minHeight: '80px' }}
                 placeholder="Добавьте новые обстоятельства если есть..."
@@ -298,6 +300,7 @@ export default function Module2Escalation() {
 
           <textarea
             className="text-editor"
+            aria-label="Текст обращения для эскалации"
             value={esc.text}
             onChange={e => setEsc(x => ({ ...x, text: e.target.value }))}
             rows={12}

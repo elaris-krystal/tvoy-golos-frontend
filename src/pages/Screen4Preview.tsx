@@ -88,7 +88,7 @@ export default function Screen4Preview() {
       ) : (
         <>
           <p className="hint-text">Добавление личных деталей усиливает запрос.</p>
-          <textarea className="text-editor" value={text} onChange={e => setText(e.target.value)} />
+          <textarea className="text-editor" aria-label="Текст обращения" value={text} onChange={e => setText(e.target.value)} />
           <div ref={endRef} style={{ height: 1 }} />
         </>
       )}
