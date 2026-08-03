@@ -163,3 +163,14 @@ body { font-family: var(--font-body); background: var(--c-bg); color: var(--c-te
 
 .countdown { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 12px; font-family: var(--font-mono); color: var(--c-text-2); }
 .calendar-btn { white-space: nowrap; font-family: var(--font-sans, inherit); font-size: 12px; }
+
+/* Тёмная тема — переопределяем только переменные, вся остальная вёрстка
+   уже построена на var(--c-*), поэтому дублировать сотни правил не нужно. */
+.dark-theme {
+  --c-bg: #16151A; --c-surface: #1E1D24; --c-border: #33323A; --c-border-strong: #46454E;
+  --c-text: #EDEBE6; --c-text-2: #A6A4AC; --c-accent: #EDEBE6; --c-accent-inv: #16151A;
+  --c-green: #4ADE80; --c-green-bg: #16302276; --c-red: #F87171; --c-red-bg: #3A1A1A;
+  --c-orange: #FBBF77; --c-orange-bg: #3A2A10; --c-yellow: #FDE68A; --c-yellow-bg: #3A3410;
+  --c-blue-bg: #1A2A3A;
+}
+.dark-theme img, .dark-theme .print-only { filter: none; }
