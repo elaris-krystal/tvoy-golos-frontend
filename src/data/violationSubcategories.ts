@@ -22,6 +22,7 @@ export const VIOLATION_SUBCATEGORIES: Set<string> = new Set([
   'health/paid_services_free_clinic', 'health/treatment_refusal',
   'pension/pension_recalculation', 'pension/pension_underpayment',
   'finance/bank_dispute', 'finance/insurance_dispute', 'finance/osago_dispute', 'finance/finance_other',
+  'transport/flight_delay', 'transport/lost_baggage', 'transport/public_transport', 'transport/transport_other',
 ]);
 
 export function isViolationSubcategory(categoryKey?: string | null, subcategoryKey?: string | null): boolean {

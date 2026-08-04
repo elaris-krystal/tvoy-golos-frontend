@@ -136,4 +136,15 @@ export const CATEGORIES: Category[] = [
       { key: 'finance_other', label: 'Другой финансовый вопрос' },
     ],
   },
+  {
+    key: 'transport',
+    label: 'Транспорт',
+    icon: '✈️',
+    subcategories: [
+      { key: 'flight_delay', label: 'Задержка или отмена рейса' },
+      { key: 'lost_baggage', label: 'Утеря или повреждение багажа' },
+      { key: 'public_transport', label: 'Общественный транспорт (автобус, электричка)' },
+      { key: 'transport_other', label: 'Другой транспортный вопрос' },
+    ],
+  },
 ];
