@@ -8,10 +8,10 @@ import type { Benefit } from '../types';
 
 const FEDERAL_FALLBACK: Record<string, Benefit[]> = {
   'family/large_family': [
-    { id: -1, benefit_name: 'Материнский капитал', description: 'При рождении первого ребёнка — 630 400 ₽', legal_basis: 'ФЗ № 256-ФЗ от 29.12.2006', is_federal: true },
+    { id: -1, benefit_name: 'Материнский капитал', description: 'При рождении первого ребёнка — 728 922 ₽ (с 01.02.2026, индексируется ежегодно 1 февраля — уточните текущую сумму на сайте СФР)', legal_basis: 'ФЗ № 256-ФЗ от 29.12.2006', is_federal: true },
   ],
   'employment/unemployed': [
-    { id: -3, benefit_name: 'Пособие по безработице', description: 'Мин. 1 500 ₽, макс. 12 792 ₽/мес через ЦЗН', legal_basis: 'Закон РФ № 1032-1 от 19.04.1991', is_federal: true },
+    { id: -3, benefit_name: 'Пособие по безработице', description: 'Мин. ≈1 884 ₽, макс. ≈16 067 ₽/мес через ЦЗН (с 01.02.2026, индексируется ежегодно — уточните текущую сумму на сайте ЦЗН/«Работа России»)', legal_basis: 'ФЗ № 565-ФЗ от 12.12.2023 «О занятости населения в РФ»', is_federal: true },
   ],
   'employment/ussr_deposits': [
     { id: -7, benefit_name: 'Компенсация по вкладам СССР', description: 'Компенсация вкладов в Сбербанке СССР по состоянию на 20.06.1991', legal_basis: 'ФЗ № 73-ФЗ от 10.05.1995', is_federal: true },
