@@ -8,7 +8,7 @@ export interface Region {
 
 export type CategoryKey =
   | 'family' | 'employment' | 'health'
-  | 'housing' | 'education' | 'pension' | 'labor' | 'utilities' | 'construction' | 'ecology' | 'consumer' | 'finance' | 'transport';
+  | 'housing' | 'education' | 'pension' | 'labor' | 'utilities' | 'construction' | 'ecology' | 'consumer' | 'finance' | 'transport' | 'privacy';
 
 export interface Category {
   key: CategoryKey;

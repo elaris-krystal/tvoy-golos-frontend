@@ -147,4 +147,15 @@ export const CATEGORIES: Category[] = [
       { key: 'transport_other', label: 'Другой транспортный вопрос' },
     ],
   },
+  {
+    key: 'privacy',
+    label: 'Персональные данные',
+    icon: '🔒',
+    subcategories: [
+      { key: 'data_misuse', label: 'Обработка данных без согласия' },
+      { key: 'data_deletion_refusal', label: 'Отказ в удалении/блокировке данных' },
+      { key: 'data_leak', label: 'Утечка персональных данных' },
+      { key: 'privacy_other', label: 'Другой вопрос по персональным данным' },
+    ],
+  },
 ];
