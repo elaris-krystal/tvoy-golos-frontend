@@ -125,4 +125,15 @@ export const CATEGORIES: Category[] = [
       { key: 'consumer_other', label: 'Другой потребительский вопрос' },
     ],
   },
+  {
+    key: 'finance',
+    label: 'Банки и страхование',
+    icon: '🏦',
+    subcategories: [
+      { key: 'bank_dispute', label: 'Спор с банком (комиссии, навязанные услуги)' },
+      { key: 'insurance_dispute', label: 'Отказ или задержка страховой выплаты' },
+      { key: 'osago_dispute', label: 'Спор по ОСАГО/КАСКО' },
+      { key: 'finance_other', label: 'Другой финансовый вопрос' },
+    ],
+  },
 ];

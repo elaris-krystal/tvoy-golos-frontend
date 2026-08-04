@@ -21,6 +21,7 @@ export const VIOLATION_SUBCATEGORIES: Set<string> = new Set([
   'consumer/refund_refusal', 'consumer/warranty_defect', 'consumer/service_quality', 'consumer/consumer_other',
   'health/paid_services_free_clinic', 'health/treatment_refusal',
   'pension/pension_recalculation', 'pension/pension_underpayment',
+  'finance/bank_dispute', 'finance/insurance_dispute', 'finance/osago_dispute', 'finance/finance_other',
 ]);
 
 export function isViolationSubcategory(categoryKey?: string | null, subcategoryKey?: string | null): boolean {
