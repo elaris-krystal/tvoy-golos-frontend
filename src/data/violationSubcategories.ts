@@ -24,6 +24,7 @@ export const VIOLATION_SUBCATEGORIES: Set<string> = new Set([
   'finance/bank_dispute', 'finance/insurance_dispute', 'finance/osago_dispute', 'finance/finance_other',
   'transport/flight_delay', 'transport/lost_baggage', 'transport/public_transport', 'transport/transport_other',
   'privacy/data_misuse', 'privacy/data_deletion_refusal', 'privacy/data_leak', 'privacy/privacy_other',
+  'education/illegal_fees', 'education/admission_refusal',
 ]);
 
 export function isViolationSubcategory(categoryKey?: string | null, subcategoryKey?: string | null): boolean {

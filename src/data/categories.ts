@@ -56,6 +56,8 @@ export const CATEGORIES: Category[] = [
       { key: 'higher', label: 'Высшее образование' },
       { key: 'vocational', label: 'Профессиональная переподготовка' },
       { key: 'children_extra', label: 'Допобразование детей' },
+      { key: 'illegal_fees', label: 'Незаконные поборы в школе/саду' },
+      { key: 'admission_refusal', label: 'Незаконный отказ в зачислении' },
     ],
   },
   {
