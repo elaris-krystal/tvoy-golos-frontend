@@ -193,3 +193,13 @@ body { font-family: var(--font-body); background: var(--c-bg); color: var(--c-te
 .bottom-nav-item.active { color: var(--c-accent); font-weight: 600; }
 .bottom-nav-icon { font-size: 20px; line-height: 1; }
 .bottom-nav-label { line-height: 1; }
+
+/* Экран Error Boundary */
+.error-boundary-screen {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  padding: 24px; background: var(--c-bg); color: var(--c-text);
+}
+.error-boundary-content { max-width: 400px; text-align: center; }
+.error-boundary-icon { font-size: 48px; display: block; margin-bottom: 16px; }
+.error-boundary-content h1 { font-size: 1.3rem; margin-bottom: 12px; }
+.error-boundary-content p { color: var(--c-text-2); line-height: 1.5; margin-bottom: 24px; }
