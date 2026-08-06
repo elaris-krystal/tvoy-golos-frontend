@@ -4,6 +4,7 @@ import Layout from '../components/Layout';
 import { useApp } from '../stores/appStore';
 import { addCase, addReminder, generateId, todayStr, addDays } from '../lib/db';
 import { isDocumentAvailable, downloadOfficialDocument, ApiError } from '../lib/api';
+import { useSpeech } from '../lib/useSpeech';
 import type { CategoryKey } from '../types';
 
 export default function Screen6Instructions() {
@@ -11,6 +12,7 @@ export default function Screen6Instructions() {
   const { state, dispatch } = useApp();
   const [reminderSet, setReminderSet] = useState(false);
   const [copied, setCopied] = useState(false);
+  const speech = useSpeech();
   const [docAvailable, setDocAvailable] = useState(false);
   const [docLoading, setDocLoading] = useState(false);
   const [docError, setDocError] = useState<string | null>(null);
@@ -103,6 +105,17 @@ export default function Screen6Instructions() {
       <button className="btn-secondary" onClick={handleCopy} style={{ marginTop: '1rem' }}>
         {copied ? '✓ Скопировано' : 'Скопировать текст обращения'}
       </button>
+
+      {speech.isSupported && (
+        <button
+          type="button"
+          className="btn-outline speech-btn"
+          onClick={() => speech.toggle(state.editedText || state.generatedText || '')}
+          style={{ marginTop: '0.5rem', width: '100%' }}
+        >
+          {speech.isSpeaking ? '⏹ Остановить' : '🔊 Прослушать текст'}
+        </button>
+      )}
 
       <button className="btn-outline" onClick={handleDownloadPdf} style={{ marginTop: '0.5rem', width: '100%' }}>
         Скачать / распечатать как PDF

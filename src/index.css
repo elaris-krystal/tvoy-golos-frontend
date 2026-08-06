@@ -203,3 +203,5 @@ body { font-family: var(--font-body); background: var(--c-bg); color: var(--c-te
 .error-boundary-icon { font-size: 48px; display: block; margin-bottom: 16px; }
 .error-boundary-content h1 { font-size: 1.3rem; margin-bottom: 12px; }
 .error-boundary-content p { color: var(--c-text-2); line-height: 1.5; margin-bottom: 24px; }
+
+.speech-btn { margin-bottom: 10px; width: 100%; }

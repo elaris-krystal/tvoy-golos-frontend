@@ -6,6 +6,7 @@ import { calcEditPct } from '../lib/db';
 import { generateTemplate } from '../lib/api';
 import { CATEGORIES } from '../data/categories';
 import { isViolationSubcategory } from '../data/violationSubcategories';
+import { useSpeech } from '../lib/useSpeech';
 
 function localTemplate(regionName: string, categoryKey: string, subcategoryKey: string): string {
   const cat = CATEGORIES.find(c => c.key === categoryKey);
@@ -36,6 +37,7 @@ export default function Screen4Preview() {
   const [scrolledToEnd, setScrolledToEnd] = useState(false);
   const endRef = useRef<HTMLDivElement>(null);
   const originalRef = useRef('');
+  const speech = useSpeech();
 
   useEffect(() => {
     if (!state.region || !state.categoryKey || !state.subcategoryKey) {
@@ -88,6 +90,15 @@ export default function Screen4Preview() {
       ) : (
         <>
           <p className="hint-text">Добавление личных деталей усиливает запрос.</p>
+          {speech.isSupported && (
+            <button
+              type="button"
+              className="btn-outline speech-btn"
+              onClick={() => speech.toggle(text)}
+            >
+              {speech.isSpeaking ? '⏹ Остановить' : '🔊 Прослушать текст'}
+            </button>
+          )}
           <textarea className="text-editor" aria-label="Текст обращения" value={text} onChange={e => setText(e.target.value)} />
           <div ref={endRef} style={{ height: 1 }} />
         </>
