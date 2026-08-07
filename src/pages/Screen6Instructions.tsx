@@ -70,10 +70,29 @@ export default function Screen6Instructions() {
     setReminderSet(true);
   }
 
+  function buildFullLetter(bodyText: string): string {
+    // ст. 7 ФЗ № 59-ФЗ обязывает указывать в обращении ФИО заявителя и
+    // почтовый адрес (для писем) либо email/личный кабинет Госуслуг (для
+    // электронных обращений) — без этого обращение формально можно
+    // признать анонимным и не отвечать по существу. Раньше сгенерированный
+    // текст содержал только суть обращения без этой обязательной «шапки» —
+    // на этапе эскалации (жалоба в прокуратуру) это уже было учтено, но
+    // на первом, самом массовом этапе — нет.
+    const dateStr = new Date().toLocaleDateString('ru-RU');
+    return (
+      `Кому: [укажите точное наименование органа/должностного лица]\n\n` +
+      `От: _________________________________________ (ваши ФИО)\n` +
+      `Почтовый адрес для ответа: ___________________________________\n` +
+      `Телефон/email: ______________________________________________\n\n` +
+      `${bodyText}\n\n` +
+      `Дата: ${dateStr}          Подпись: _______________`
+    );
+  }
+
   async function handleCopy() {
     const text = state.editedText || state.generatedText;
     if (text) {
-      await navigator.clipboard.writeText(text).catch(() => {});
+      await navigator.clipboard.writeText(buildFullLetter(text)).catch(() => {});
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
@@ -89,7 +108,7 @@ export default function Screen6Instructions() {
         <div className="instr-card recommended">
           <div className="instr-badge">Рекомендуется</div>
           <h3>Через Госуслуги</h3>
-          <p>Авторизованная подача ускоряет рассмотрение. Прямые отправки на email с марта 2025 года часто не принимаются без идентификации через ЕСИА.</p>
+          <p>Авторизованная подача ускоряет рассмотрение. Прямые отправки на email с марта 2025 года часто не принимаются без идентификации через ЕСИА. При подаче через Госуслуги ваши ФИО и адрес подставляются автоматически из профиля — их не нужно дописывать вручную.</p>
           <a href="https://www.gosuslugi.ru" target="_blank" rel="noreferrer" className="btn-outline">Открыть Госуслуги ↗</a>
         </div>
         <div className="instr-card instr-card-info">
@@ -102,7 +121,12 @@ export default function Screen6Instructions() {
         </div>
       </div>
 
-      <button className="btn-secondary" onClick={handleCopy} style={{ marginTop: '1rem' }}>
+      <p className="hint-text" style={{ marginTop: '1rem' }}>
+        При копировании и печати добавляются строки для ФИО, адреса, подписи и даты —
+        по ст. 7 ФЗ № 59-ФЗ они обязательны для писем и подачи через сайт органа
+        (для Госуслуг не нужны — там вас идентифицирует вход через ЕСИА).
+      </p>
+      <button className="btn-secondary" onClick={handleCopy}>
         {copied ? '✓ Скопировано' : 'Скопировать текст обращения'}
       </button>
 
@@ -141,7 +165,16 @@ export default function Screen6Instructions() {
         <div className="print-doc-date">
           {state.region?.name ?? ''}, {new Date().toLocaleDateString('ru-RU')}
         </div>
+        <div className="print-doc-sender">
+          <p>Кому: _______________________________________________________</p>
+          <p>От (ФИО): ____________________________________________________</p>
+          <p>Почтовый адрес для ответа: ____________________________________</p>
+          <p>Телефон/email: _______________________________________________</p>
+        </div>
         <div className="print-doc-body">{state.editedText || state.generatedText}</div>
+        <div className="print-doc-signature">
+          <p>Подпись: _______________&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Дата: {new Date().toLocaleDateString('ru-RU')}</p>
+        </div>
         <div className="print-doc-footer">
           Документ подготовлен с помощью сервиса «Твой Голос» — технического инструмента помощи в составлении обращений. Сервис не является юридической фирмой, адвокатом или представителем пользователя. Текст носит рекомендательный характер, пользователь самостоятельно проверяет содержание и несёт полную ответственность за направляемое обращение.
         </div>
